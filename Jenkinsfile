@@ -26,6 +26,14 @@ pipeline {
                 sh 'node -v'
             }
         }
+        stage('Install Node.js') {
+            steps {
+                sh '''
+                    curl -sL https://deb.nodesource.com/setup_14.x | bash -
+                    sudo apt-get install -y nodejs
+                '''
+            }
+        }
         stage('Check Node.js Version in Docker') {
             steps {
                 script {
