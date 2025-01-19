@@ -21,7 +21,19 @@ pipeline {
                 sh 'npm install'
             }
         }
-        
+        stage('Check Node.js Version') {
+            steps {
+                sh 'node -v'
+            }
+        }
+        stage('Check Node.js Version in Docker') {
+            steps {
+                script {
+                    sh "docker run --rm ${DOCKER_IMAGE} node -v"
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'npm run build'
@@ -37,7 +49,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_IMAGE} ."
+                    sh "docker build -f Dockerfile -t ${DOCKER_IMAGE} ."
                 }
             }
         }
