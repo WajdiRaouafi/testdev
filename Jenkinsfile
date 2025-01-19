@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+    tools {
+        nodejs '20.16.0'
+    }
     environment {
         DOCKER_IMAGE = "project-devops:latest"
         // For pushing to Docker Hub, you might do:
